@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        DI.se_No_Reg
 // @namespace   http://di.se/
-// @version     0.1
+// @version     0.2
 // @description Makes it possible to read paywall protected DI.se premium content
 // @include      http://*.di.se/*
 // @copyright   2015,@paoTrade, in response to @richard_brase shitty post about Precise Biometrics 20151109
@@ -12,12 +12,22 @@
 //http://www.di.se/di/artiklar/2015/11/9/den-smarte-ger-precise-fingret/
 
 $(document).ready(function () {
+    
+//    /html/body/script[21]
+ // //*[@id="serviceplusPaywall"]
+var xpathResult = document.evaluate("./html/body/script[21]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+var node=xpathResult.singleNodeValue;
+if(node!=null)
+node.parentNode.removeChild(node);
+    
 var xpathResult = document.evaluate(".//*[@id=\"aspnetForm\"]/div[10]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/article/div[2]/div[4]/div[2]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
 var node=xpathResult.singleNodeValue;
+if(node!=null)
 node.parentNode.removeChild(node);
     
 var xpathResult = document.evaluate(".//*[@id=\"paywall-container\"]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
 var node=xpathResult.singleNodeValue;
+if(node!=null)
 node.parentNode.removeChild(node);
 
 var x = document.getElementsByClassName("paywall-content");
@@ -25,7 +35,7 @@ var x = document.getElementsByClassName("paywall-content");
 var i;
 for (i = 0; i < x.length; i++) {
     
-    x[i].style.height = "";
+    x[i].style.height = "800px";
   
 }
 var x = document.getElementsByClassName("paywall-container");
