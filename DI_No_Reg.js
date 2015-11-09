@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        DI.se_No_Reg
 // @namespace   http://di.se/
-// @version     0.4
+// @version     0.5
 // @description Makes it possible to read paywall protected DI.se premium content
 // @include      http://*.di.se/*
 // @copyright   2015,@paoTrade, in response to @richard_brase shitty post about Precise Biometrics 20151109
@@ -34,8 +34,30 @@ var node=xpathResult.singleNodeValue;
 if(node!=null)
 node.parentNode.removeChild(node);
     
-//
 
+var x = document.getElementsByTagName('*');
+ 
+var i;
+for (i = 0; i < x.length; i++) {
+    try {
+   var str=x[i].className;
+    
+        if(x[i]!=null){ 
+            if(str.indexOf('premium-content')!=-1)
+            {
+    x[i].className=str.replace("premium-content","");
+    x[i].style.display='';
+               
+            }
+        }
+  
+}catch (e) {
+}
+finally {
+
+}
+  
+}
 var x = document.getElementsByClassName("paywall-content");
  
 var i;
